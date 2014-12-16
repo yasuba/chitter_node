@@ -1,0 +1,54 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2014-12-16T21:52:11.450Z",
+    "end": "2014-12-16T21:52:11.729Z",
+    "duration": 279
+  },
+  "tests": [
+    {
+      "title": "has a title",
+      "fullTitle": "homepage has a title",
+      "duration": 41,
+      "err": {}
+    },
+    {
+      "title": "shows messages on the homepage",
+      "fullTitle": "homepage shows messages on the homepage",
+      "duration": 42,
+      "err": {}
+    },
+    {
+      "title": "allows a user to sign up to the service",
+      "fullTitle": "homepage allows a user to sign up to the service",
+      "duration": 42,
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [],
+  "passes": [
+    {
+      "title": "has a title",
+      "fullTitle": "homepage has a title",
+      "duration": 41,
+      "err": {}
+    },
+    {
+      "title": "shows messages on the homepage",
+      "fullTitle": "homepage shows messages on the homepage",
+      "duration": 42,
+      "err": {}
+    },
+    {
+      "title": "allows a user to sign up to the service",
+      "fullTitle": "homepage allows a user to sign up to the service",
+      "duration": 42,
+      "err": {}
+    }
+  ]
+}
