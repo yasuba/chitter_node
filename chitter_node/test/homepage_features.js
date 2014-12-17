@@ -16,9 +16,13 @@ describe('homepage', function(){
   });
 
   it('allows a user to sign up to the service', function(){
-    casper.then(function(){
-
+    casper.thenOpen('http://localhost:3000/sessions/new', function(){
+      'form[action="/sessions"]'.should.be.inDOM.and.be.visible
+      this.fill('form[action="/sessions"]', {
+        'username': 'bob'
+      }, true)
     });
+    expect("p").to.include.text("Hello bob");
   });
 
 });

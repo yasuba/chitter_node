@@ -5,9 +5,9 @@
     "passes": 3,
     "pending": 0,
     "failures": 0,
-    "start": "2014-12-16T21:52:11.450Z",
-    "end": "2014-12-16T21:52:11.729Z",
-    "duration": 279
+    "start": "2014-12-17T19:09:26.961Z",
+    "end": "2014-12-17T19:09:27.260Z",
+    "duration": 299
   },
   "tests": [
     {
@@ -19,13 +19,13 @@
     {
       "title": "shows messages on the homepage",
       "fullTitle": "homepage shows messages on the homepage",
-      "duration": 42,
+      "duration": 41,
       "err": {}
     },
     {
       "title": "allows a user to sign up to the service",
       "fullTitle": "homepage allows a user to sign up to the service",
-      "duration": 42,
+      "duration": 65,
       "err": {}
     }
   ],
@@ -41,13 +41,13 @@
     {
       "title": "shows messages on the homepage",
       "fullTitle": "homepage shows messages on the homepage",
-      "duration": 42,
+      "duration": 41,
       "err": {}
     },
     {
       "title": "allows a user to sign up to the service",
       "fullTitle": "homepage allows a user to sign up to the service",
-      "duration": 42,
+      "duration": 65,
       "err": {}
     }
   ]
