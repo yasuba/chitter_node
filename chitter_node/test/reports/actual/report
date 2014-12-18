@@ -1,13 +1,13 @@
 {
   "stats": {
     "suites": 1,
-    "tests": 3,
-    "passes": 3,
+    "tests": 5,
+    "passes": 5,
     "pending": 0,
     "failures": 0,
-    "start": "2014-12-17T19:09:26.961Z",
-    "end": "2014-12-17T19:09:27.260Z",
-    "duration": 299
+    "start": "2014-12-18T14:28:23.570Z",
+    "end": "2014-12-18T14:28:24.040Z",
+    "duration": 470
   },
   "tests": [
     {
@@ -19,13 +19,25 @@
     {
       "title": "shows messages on the homepage",
       "fullTitle": "homepage shows messages on the homepage",
-      "duration": 41,
+      "duration": 42,
+      "err": {}
+    },
+    {
+      "title": "can go to the sign up page from homepage",
+      "fullTitle": "homepage can go to the sign up page from homepage",
+      "duration": 66,
+      "err": {}
+    },
+    {
+      "title": "does not greet a signed-out user",
+      "fullTitle": "homepage does not greet a signed-out user",
+      "duration": 42,
       "err": {}
     },
     {
       "title": "allows a user to sign up to the service",
       "fullTitle": "homepage allows a user to sign up to the service",
-      "duration": 65,
+      "duration": 106,
       "err": {}
     }
   ],
@@ -41,13 +53,25 @@
     {
       "title": "shows messages on the homepage",
       "fullTitle": "homepage shows messages on the homepage",
-      "duration": 41,
+      "duration": 42,
+      "err": {}
+    },
+    {
+      "title": "can go to the sign up page from homepage",
+      "fullTitle": "homepage can go to the sign up page from homepage",
+      "duration": 66,
+      "err": {}
+    },
+    {
+      "title": "does not greet a signed-out user",
+      "fullTitle": "homepage does not greet a signed-out user",
+      "duration": 42,
       "err": {}
     },
     {
       "title": "allows a user to sign up to the service",
       "fullTitle": "homepage allows a user to sign up to the service",
-      "duration": 65,
+      "duration": 106,
       "err": {}
     }
   ]

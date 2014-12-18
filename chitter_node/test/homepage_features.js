@@ -15,14 +15,33 @@ describe('homepage', function(){
     });
   });
 
-  it('allows a user to sign up to the service', function(){
-    casper.thenOpen('http://localhost:3000/sessions/new', function(){
-      'form[action="/sessions"]'.should.be.inDOM.and.be.visible
-      this.fill('form[action="/sessions"]', {
-        'username': 'bob'
-      }, true)
+  it('can go to the sign up page from homepage', function(){
+    casper.then(function(){
+      this.click('.sign-up');
+    })
+    casper.then(function(){
+      console.log('new location is ' + this.getCurrentUrl());
     });
-    expect("p").to.include.text("Hello bob");
+  });
+
+  it('does not greet a signed-out user', function(){
+    casper.then(function(){
+      expect('body').not.to.have.text('Hello bob');
+    })
+  });
+
+  it('allows a user to sign up to the service', function(){
+    casper.then(function(){
+      casper.thenOpen('sessions/new', function(){
+        'form[action="/sessions"]'.should.be.inDOM.and.be.visible
+        casper.fill('form', {
+          username: 'bob'
+        }, true)
+        casper.then(function(){
+          expect('p').to.include.text('Hello bob');
+        })
+      });
+    })
   });
 
 });
