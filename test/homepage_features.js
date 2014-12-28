@@ -5,7 +5,7 @@ describe('homepage', function(){
 
   it('has a title', function(){
     casper.then(function(){
-      expect("h1").to.include.text("Chitter on Node.js");
+      expect("h1").to.include.text("Chitter: a Node.js app");
     });
   });
 

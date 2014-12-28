@@ -1,0 +1,11 @@
+body {
+  background-color: #edece9;
+  font-family: 'Helvetica Neue', Helvetica, Arial;
+  margin: 0;
+  padding: 0 3%;
+  width: 100%;
+  background-image:url('../images/background.gif');
+  background-repeat: no-repeat;
+  background-position: left 40px;
+  background-attachment: fixed;
+}
