@@ -1,13 +1,13 @@
 {
   "stats": {
-    "suites": 1,
-    "tests": 5,
-    "passes": 5,
+    "suites": 3,
+    "tests": 9,
+    "passes": 9,
     "pending": 0,
     "failures": 0,
-    "start": "2014-12-18T14:28:23.570Z",
-    "end": "2014-12-18T14:28:24.040Z",
-    "duration": 470
+    "start": "2014-12-27T22:39:13.855Z",
+    "end": "2014-12-27T22:39:15.096Z",
+    "duration": 1241
   },
   "tests": [
     {
@@ -25,19 +25,43 @@
     {
       "title": "can go to the sign up page from homepage",
       "fullTitle": "homepage can go to the sign up page from homepage",
-      "duration": 66,
+      "duration": 90,
       "err": {}
     },
     {
       "title": "does not greet a signed-out user",
       "fullTitle": "homepage does not greet a signed-out user",
-      "duration": 42,
+      "duration": 45,
       "err": {}
     },
     {
       "title": "allows a user to sign up to the service",
       "fullTitle": "homepage allows a user to sign up to the service",
-      "duration": 106,
+      "duration": 141,
+      "err": {}
+    },
+    {
+      "title": "with correct credentials",
+      "fullTitle": "user signs in with correct credentials",
+      "duration": 94,
+      "err": {}
+    },
+    {
+      "title": "with incorrect credentials",
+      "fullTitle": "user signs in with incorrect credentials",
+      "duration": 140,
+      "err": {}
+    },
+    {
+      "title": "cannot sign in again",
+      "fullTitle": "a signed-in user cannot sign in again",
+      "duration": 114,
+      "err": {}
+    },
+    {
+      "title": "should be able to sign again after signing out",
+      "fullTitle": "a signed-in user should be able to sign again after signing out",
+      "duration": 72,
       "err": {}
     }
   ],
@@ -59,19 +83,43 @@
     {
       "title": "can go to the sign up page from homepage",
       "fullTitle": "homepage can go to the sign up page from homepage",
-      "duration": 66,
+      "duration": 90,
       "err": {}
     },
     {
       "title": "does not greet a signed-out user",
       "fullTitle": "homepage does not greet a signed-out user",
-      "duration": 42,
+      "duration": 45,
       "err": {}
     },
     {
       "title": "allows a user to sign up to the service",
       "fullTitle": "homepage allows a user to sign up to the service",
-      "duration": 106,
+      "duration": 141,
+      "err": {}
+    },
+    {
+      "title": "with correct credentials",
+      "fullTitle": "user signs in with correct credentials",
+      "duration": 94,
+      "err": {}
+    },
+    {
+      "title": "with incorrect credentials",
+      "fullTitle": "user signs in with incorrect credentials",
+      "duration": 140,
+      "err": {}
+    },
+    {
+      "title": "cannot sign in again",
+      "fullTitle": "a signed-in user cannot sign in again",
+      "duration": 114,
+      "err": {}
+    },
+    {
+      "title": "should be able to sign again after signing out",
+      "fullTitle": "a signed-in user should be able to sign again after signing out",
+      "duration": 72,
       "err": {}
     }
   ]

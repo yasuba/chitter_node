@@ -1,22 +1,23 @@
-<!DOCTYPE>
-<html>
+<% layout('layout') -%>
 
-<head>
-  <title>Chitter on Node.js</title>
-</head>
-
-<body>
   <h1>Chitter on Node.js</h1>
 
-  <a href="/sessions/new" class="sign-up">Sign Up</a>
+<% if(user === undefined) { %>
+  <a href="/users/new" class="sign-up">Sign Up</a>
+  <a href="/sessions/new" class="sign-in">Sign In</a>
+<% } else { %>
+  <form method="post" action="/sessions/delete">
+    <button class="sign-out">Sign out</button>
+  </form>
+  <p>Hello <%= user.username %></p>
 
-  <% if (username !== undefined) { %>
-    <p>Hello <%= username %></p>
-  <% } %>
+  <form method="post" action="/post-peep">
+    <input type="text" name="content" placeholder="Type your peep">
+    <button class="post-peep">Post peep</button>
+  </form>
+
+<% } %>
 
   <ul>
     <li>Maya is totes awesome FTW!!!11</li>
   </ul>
-</body>
-
-</html

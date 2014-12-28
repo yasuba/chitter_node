@@ -27,10 +27,12 @@
     "phantomjs": "^1.9.12"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.8",
     "ejs": "^1.0.0",
+    "ejs-locals": "^1.0.2",
     "express": "^4.10.6",
-    "pg": "^4.1.1",
-    "sequelize": "^2.0.0-rc3"
+    "express-session": "^1.9.3",
+    "pg": "^4.1.1"
   }
 }

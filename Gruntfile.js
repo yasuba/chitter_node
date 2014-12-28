@@ -66,15 +66,15 @@ module.exports = function(grunt) {
           src: ['test/test.js']
         }
       },
-      output: {
-        options: {
-          reporter: 'json',
-          file: 'test/reports/actual/report'
-        },
-        files: {
-          src: ['test/report.js']
-        }
-      }
+      // output: {
+      //   options: {
+      //     reporter: 'json',
+      //     file: 'test/reports/actual/report'
+        // },
+        // files: {
+        //   src: ['test/report.js']
+        // }
+      // }
     },
 
     // Unit tests.
@@ -93,6 +93,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['mocha_casperjs']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['mocha_casperjs', 'test']);
+  grunt.registerTask('default', ['test']);
 
 };

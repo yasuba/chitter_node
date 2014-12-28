@@ -2,7 +2,7 @@ var User = sequelize.define('User',{
   username: Sequelize.STRING,
   password: Sequelize.STRING
   }, {
-    tableName: 'my_user_table',
+    tableName: 'users',
 });
 
 user
