@@ -9,12 +9,6 @@ describe('homepage', function(){
     });
   });
 
-  it('shows messages on the homepage', function(){
-    casper.then(function(){
-      expect("li").to.include.text("Maya is totes awesome FTW!!!11");
-    });
-  });
-
   it('can go to the sign up page from homepage', function(){
     casper.then(function(){
       this.click('.sign-up');

@@ -22,6 +22,13 @@ app.set('view engine', 'ejs');
 app.get('/', function(request,response){
   client.query("SELECT * FROM peeps", function(err, content){
     var peeps = content.rows;
+    function compare(a,b){
+      if (a.date_added > b.date_added)
+        return -1;
+      if (a.date_added < b. date_added)
+        return 1;
+      return 0}
+      peeps.sort(compare);
     var user = request.session.user;
     response.render('index', {'user':user, 'peeps': peeps});
   });
