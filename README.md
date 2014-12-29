@@ -4,17 +4,17 @@ I'm trying to create another Twitter clone that will allow the users to post mes
 
 Features:
 
-+ In order to use chitter as a maker I want to sign up to the service
-+ In order to user chitter as a maker I want to log in
-+ In order to avoid others to use my account as a maker I want to log out
-+ In order to let people know what I am doing as a maker I want to post a message to chitter
-+ In order to see what people have to say as a maker I want to see all peeps in chronological order
++ In order to use chitter I want to sign up to the service
++ In order to user chitter I want to log in
++ In order to avoid others to use my account I want to log out
++ In order to let people know what I am doing I want to post a message to chitter
++ In order to see what people have to say I want to see all peeps in chronological order
 
 Notes:
 + Makers sign up to chitter with their password and a user name (i.e. s3cr3t, yasuba)
-+ The username is unique
++ The username is unique (to do)
 + Peeps (posts to chitter) have the name of the user
-+ Use bcrypt to secure the passwords
++ Use bcrypt to secure the passwords (to do)
 + Use postgres to save the data
 + You don't have to be logged in to see the peeps
 + You only can peep if you are logged in.
