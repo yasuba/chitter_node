@@ -48,6 +48,10 @@ h1 {
   width: 50%;
 }
 
+.btn-default {
+  background-color: #278f67;
+}
+
 .login-form input[type="text"], input[type="password"] {
   padding: 1%;
   margin-top: 2%;

@@ -11,11 +11,11 @@ Features:
 + In order to see what people have to say as a maker I want to see all peeps in chronological order
 
 Notes:
-+ Makers sign up to chitter with their email, password, name and a user name (i.e. maya@test.com, s3cr3t, Maya Driver, yasuba)
-+ The username and email are unique
-+ Peeps (posts to chitter) have the name of the maker and their user handle
++ Makers sign up to chitter with their password and a user name (i.e. s3cr3t, yasuba)
++ The username is unique
++ Peeps (posts to chitter) have the name of the user
 + Use bcrypt to secure the passwords
-+ Use data mapper and postgres to save the data
++ Use postgres to save the data
 + You don't have to be logged in to see the peeps
 + You only can peep if you are logged in.
 + Bonus: If you have time you can implement the following: Work on the css to make it look good (we all like beautiful things).
@@ -36,3 +36,12 @@ Notes:
 * Casper-Chai
 * Mocha-casperjs
 * Grunt-mocha-casperjs
+
+##Run the app
+
+To run Chitter, first you must have Node.js installed. Next clone this repository, cd into it then npm install all the dependencies. Finally start the server and navigate to localhost port 3000.
+
+    git clone git@github.com:yasuba/chitter_node.git
+    cd chitter_node
+    npm install
+    npm start
