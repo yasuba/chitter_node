@@ -1,11 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #edece9;
   font-family: 'Helvetica Neue', Helvetica, Arial;
   margin: 0;
-  padding: 0 3%;
+  padding: 3%;
   width: 100%;
   background-image:url('../images/background.gif');
   background-repeat: no-repeat;
   background-position: left 40px;
   background-attachment: fixed;
 }
+
+h1 {
+  display: inline;
+  margin-left: 5%;
+}
+
+.logins {
+  float: right;
+  width: 25%;
+}
+
+.logins h2 {
+  font-size: 1.5em;
+  display: inline;
+  margin-right: 10%;
+}
+
+.logout {
+  display: inline;
+}
+
+.login-form {
+  padding: 2% 5% 5%;
+  margin: 5% auto;
+  border: 3px solid grey;
+  border-radius: 10px;
+  width: 50%;
+}
+
+.login-form input[type="text"], input[type="password"] {
+  padding: 1%;
+  margin-top: 2%;
+}
+
+#write-peep {
+  padding: 5% 0 0;
+  width: 40%;
+  margin-left: 7%;
+  float: left;
+}
+
+#write-peep h3 {
+  margin: -2% 0 2% 15%;
+}
+
+.post-peep {
+  vertical-align: bottom;
+}
+
+#write-peep input {
+  margin-left: 15%;
+  width: 250px;
+  padding: 8%;
+  border-radius: 5px;
+  font-size: 1.25em;
+}
+
+#peeps {
+  display: inline;
+}
+
+ul {
+  padding: 7% 0;
+  margin-left: 45%;
+  width: 45%;
+}
+
+.username {
+  float: right;
+}
+
+footer {
+  margin-top: 30%;
+}
+

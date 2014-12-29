@@ -1,25 +1,35 @@
 <% layout('layout') -%>
 
 <% if(user === undefined) { %>
-  <a href="/users/new" class="sign-up">Sign Up</a>
-  <a href="/sessions/new" class="sign-in">Sign In</a>
-<% } else { %>
-  <form method="post" action="/sessions/delete">
-    <button class="sign-out">Sign out</button>
-  </form>
-  <p>Hello <%= user.username %></p>
+<section class="logins">
+  <h2>Login</h2>
+  <a href="/users/new" class="sign-up btn btn-default">Sign Up</a>
+  <a href="/sessions/new" class="sign-in btn btn-default">Sign In</a>
+</section>
 
+<% } else { %>
+<section class="logins">
+  <h2>Logout</h2>
+  <form class="logout" method="post" action="/sessions/delete">
+    <button class="sign-out btn btn-default">Sign out</button>
+  </form>
+</section>
+
+<section id="write-peep">
+  <h3>Hello <%= user.username %></h3>
   <form method="post" action="/post-peep">
     <input type="text" name="content" placeholder="Type your peep">
-    <button class="post-peep">Post peep</button>
+    <button class="post-peep btn btn-default">Post peep</button>
   </form>
-
+</section>
 <% } %>
 
+<section id="peeps">
   <ul>
     <% if(peeps) { %>
       <% for(i = 0; i < peeps.length; i ++) { %>
-      <li><%= peeps[i].content %> <%= peeps[i].username %></li>
+      <li class="peep list-group-item list-group-item-info"><%= peeps[i].content %> <span class="username"><%= peeps[i].username %></span></li>
       <% } %>
     <% } %>
   </ul>
+  </section>

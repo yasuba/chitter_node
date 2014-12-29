@@ -22,13 +22,7 @@ app.set('view engine', 'ejs');
 app.get('/', function(request,response){
   client.query("SELECT * FROM peeps", function(err, content){
     var peeps = content.rows;
-    function compare(a,b){
-      if (a.date_added > b.date_added)
-        return -1;
-      if (a.date_added < b. date_added)
-        return 1;
-      return 0}
-      peeps.sort(compare);
+    peeps.sort(compare);
     var user = request.session.user;
     response.render('index', {'user':user, 'peeps': peeps});
   });
@@ -43,6 +37,7 @@ app.post('/users', function(request, response){
   client.query("SELECT * FROM peeps", function(err, content){
     var user = request.session.user;
     var peeps = content.rows;
+    peeps.sort(compare);
     response.render('index', {'user':user, 'peeps': peeps});
   });
 });
@@ -57,6 +52,7 @@ app.post('/sessions', function(request, response){
       return console.error('error running query', err)
     }
     var peeps = content.rows;
+    peeps.sort(compare);
     client.query("SELECT * FROM users WHERE username=$1 and password=$2", [request.body.username, request.body.password], function(err,result){
       if(err) {
         return console.error('error running query', err);
@@ -75,6 +71,7 @@ app.post('/sessions', function(request, response){
 app.post('/sessions/delete', function(request, response){
   client.query("SELECT * FROM peeps", function(err, content){
     var peeps = content.rows;
+    peeps.sort(compare);
     request.session.user = undefined;
     response.render('index', {'user':request.session.user, 'peeps': peeps});
   });
@@ -88,9 +85,20 @@ app.post('/post-peep', function(request, response){
       return console.error('error running query', err);
     }
     var peeps = content.rows;
+    peeps.sort(compare);
     response.render('index', {'user': user, 'peeps': peeps});
   });
 });
+
+function compare(a,b){
+  if (a.date_added > b.date_added){
+    return -1;
+  }
+  if (a.date_added < b. date_added){
+    return 1;
+  }
+  return 0;
+};
 
 server.listen(3000, function(){
   console.log('Server listening on port 3000');
