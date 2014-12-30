@@ -40,12 +40,6 @@ describe('user signs in', function(){
   });
 
   it('with incorrect credentials', function(){
-    // casper.then(function(){
-    //   this.click('.sign-out');
-    //   casper.waitForUrl('http://localhost:3000/sessions/delete', function(){
-    //     this.click('.sign-in');
-    //   });
-    // });
     userHelper('Bob', 'wrong');
     casper.then(function(){
       expect('h3').not.to.include.text('Hello Bob');

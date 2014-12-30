@@ -25,6 +25,12 @@ h1 {
   margin-left: 5%;
 }
 
+.home-bird {
+  margin: 8% 0 0 15%;
+  float: left;
+  clear: both;
+}
+
 .logins {
   float: right;
   width: 25%;
@@ -91,7 +97,7 @@ ul {
 }
 
 .username {
-  float: right;
+  margin-left: 70%;
 }
 
 footer {
