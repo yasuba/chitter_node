@@ -29,16 +29,34 @@ app.get('/', function(request,response){
 });
 
 app.get('/users/new', function(request,response){
-  response.render('users/new');
+  var auser = 0;
+  response.render('users/new', {'auser': auser});
 });
 
 app.post('/users', function(request, response){
-  client.query("INSERT INTO users(username, password) values($1, $2)", [request.body.username, request.body.password]);
-  client.query("SELECT * FROM peeps", function(err, content){
-    var user = request.session.user;
-    var peeps = content.rows;
-    peeps.sort(compare);
-    response.render('index', {'user':user, 'peeps': peeps});
+  client.query("SELECT * FROM users WHERE username=$1", [request.body.username], function(err, result){
+    if(err) {
+      return console.error('error running query', err)
+    }
+    if(result.rowCount !== 0) {
+      var auser = result
+      response.render('users/new', {'auser': auser});
+    }
+    client.query("INSERT INTO users(username, password) values($1, $2)", [request.body.username, request.body.password]);
+    client.query("SELECT * FROM peeps", function(err, content){
+      if(err) {
+        return console.error('error running query', err)
+      }
+      var peeps = content.rows;
+      peeps.sort(compare);
+      client.query("SELECT * FROM users WHERE username=$1 and password=$2", [request.body.username, request.body.password], function(err,result){
+        if(err) {
+          return console.error('error running query', err)
+        }
+        request.session.user = result.rows[0];
+        response.render('index', {'user':request.session.user, 'peeps': peeps});
+      });
+    });
   });
 });
 

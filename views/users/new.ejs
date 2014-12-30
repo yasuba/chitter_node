@@ -1,5 +1,9 @@
 <% layout('../layout') -%>
 
+<% if(auser !== 0) { %>
+  <p class="alert">That username has already been taken.</p>
+<% } %>
+
 <form class="login-form" method="POST" action="/users">
   <h2>Create a Chitter account</h2>
   <input type="text" name='username' placeholder="Username">
