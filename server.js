@@ -6,9 +6,13 @@ var bodyParser = require('body-parser');
 var pg = require('pg');
 var engine = require('ejs-locals');
 var session = require('express-session');
-// var sess;
 
-var conString = "pg://maya:Sakura1981@localhost:5432/chitter_node_development";
+if(process.env.NODE_ENV === 'testing') {
+  var conString = "pg://maya:Sakura1981@localhost:5432/chittern_test";
+} else {
+  var conString = "pg://maya:Sakura1981@localhost:5432/chittern_development";
+}
+
 var client = new pg.Client(conString);
 client.connect();
 
@@ -29,8 +33,8 @@ app.get('/', function(request,response){
 });
 
 app.get('/users/new', function(request,response){
-  var auser = 0;
-  response.render('users/new', {'auser': auser});
+  var userExist = 0;
+  response.render('users/new', {'userExist': userExist});
 });
 
 app.post('/users', function(request, response){
@@ -39,8 +43,8 @@ app.post('/users', function(request, response){
       return console.error('error running query', err)
     }
     if(result.rowCount !== 0) {
-      var auser = result
-      response.render('users/new', {'auser': auser});
+      var userExist = result
+      response.render('users/new', {'userExist': userExist});
     }
     client.query("INSERT INTO users(username, password) values($1, $2)", [request.body.username, request.body.password]);
     client.query("SELECT * FROM peeps", function(err, content){
@@ -61,7 +65,8 @@ app.post('/users', function(request, response){
 });
 
 app.get('/sessions/new', function(request, response){
-  response.render('sessions/new');
+  var noUser = undefined;
+  response.render('sessions/new', {'noUser': noUser});
 });
 
 app.post('/sessions', function(request, response){
@@ -80,7 +85,8 @@ app.post('/sessions', function(request, response){
         response.render('index', {'user':request.session.user, 'peeps': peeps});
       }
       else {
-        response.render('sessions/new');
+        var noUser = 0;
+        response.render('sessions/new', {'noUser': noUser});
       }
     });
   });

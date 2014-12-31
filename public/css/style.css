@@ -25,6 +25,15 @@ h1 {
   margin-left: 5%;
 }
 
+a h1, a h1:hover {
+  text-decoration: none;
+}
+
+a:visited h1 {
+  text-decoration: none;
+  color: #000;
+}
+
 .home-bird {
   margin: 8% 0 0 15%;
   float: left;
@@ -49,18 +58,36 @@ h1 {
 .login-form {
   padding: 2% 5% 5%;
   margin: 5% auto;
-  border: 3px solid grey;
-  border-radius: 10px;
+  border: 3px solid #999;
+  border-radius: 5px;
   width: 50%;
+  background-color: #fff;
 }
 
 .btn-default {
   background-color: #278f67;
+  color:#fff;
+}
+
+.btn-default:hover {
+  background-color: #ccc;
 }
 
 .login-form input[type="text"], input[type="password"] {
   padding: 1%;
   margin-top: 2%;
+  background-color: #edece9;
+  color: #000;
+}
+
+.alert {
+  color: red;
+  border: 3px solid #999;
+  border-radius: 5px;
+  margin: 5% auto -2%;
+  width: 50%;
+  background-color: #fff;
+  text-align: center;
 }
 
 #write-peep {
@@ -97,7 +124,9 @@ ul {
 }
 
 .username {
-  margin-left: 70%;
+  display: block;
+  padding-top: 1%;
+  color: #999;
 }
 
 footer {

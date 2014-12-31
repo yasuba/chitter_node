@@ -1,5 +1,9 @@
 <% layout('../layout') -%>
 
+<% if(noUser === 0) { %>
+  <p class="alert">The username or password is incorrect.</p>
+<% } %>
+
 <form class="login-form" method="POST" action="/sessions">
   <h2>Sign in to Chitter</h2>
   <input type="text" name='username' placeholder="Username">
