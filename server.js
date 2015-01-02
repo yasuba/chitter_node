@@ -7,6 +7,7 @@ var pg = require('pg');
 var engine = require('ejs-locals');
 var session = require('express-session');
 var timeago = require('timeago');
+var bcrypt = require('bcrypt');
 
 if(process.env.NODE_ENV === 'testing') {
   var conString = "pg://maya:Sakura1981@localhost:5432/chittern_test";
@@ -39,6 +40,8 @@ app.get('/users/new', function(request,response){
 });
 
 app.post('/users', function(request, response){
+  var salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(request.body.password, salt);
   client.query("SELECT * FROM users WHERE username=$1", [request.body.username], function(err, result){
     if(err) {
       return console.error('error running query', err)
@@ -47,14 +50,14 @@ app.post('/users', function(request, response){
       var userExist = result
       response.render('users/new', {'userExist': userExist});
     }
-    client.query("INSERT INTO users(username, password) values($1, $2)", [request.body.username, request.body.password]);
+    client.query("INSERT INTO users(username, password, salt) values($1, $2, $3)", [request.body.username, hash, salt]);
     client.query("SELECT * FROM peeps", function(err, content){
       if(err) {
         return console.error('error running query', err)
       }
       var peeps = content.rows;
       peeps.sort(compare);
-      client.query("SELECT * FROM users WHERE username=$1 and password=$2", [request.body.username, request.body.password], function(err,result){
+      client.query("SELECT * FROM users WHERE username=$1", [request.body.username], function(err,result){
         if(err) {
           return console.error('error running query', err)
         }
@@ -77,13 +80,20 @@ app.post('/sessions', function(request, response){
     }
     var peeps = content.rows;
     peeps.sort(compare);
-    client.query("SELECT * FROM users WHERE username=$1 and password=$2", [request.body.username, request.body.password], function(err,result){
+    client.query("SELECT * FROM users WHERE username=$1", [request.body.username], function(err,result){
       if(err) {
         return console.error('error running query', err);
       }
       if(result.rows[0]) {
-        request.session.user = result.rows[0];
-        response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
+        var newHash = bcrypt.hashSync(request.body.password, result.rows[0].salt);
+        if(newHash === result.rows[0].password) {
+          request.session.user = result.rows[0];
+          response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
+        }
+        else {
+          var noUser = 0;
+          response.render('sessions/new', {'noUser': noUser});
+        }
       }
       else {
         var noUser = 0;
