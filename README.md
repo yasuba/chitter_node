@@ -14,7 +14,7 @@ Notes:
 + Makers sign up to chitter with their password and a user name (i.e. s3cr3t, yasuba)
 + The username is unique
 + Peeps (posts to chitter) have the name of the user
-+ Use bcrypt to secure the passwords (to do)
++ Use bcrypt to secure the passwords
 + Use postgres to save the data
 + You don't have to be logged in to see the peeps
 + You only can peep if you are logged in.
