@@ -30,7 +30,7 @@
   <ul>
     <% if(peeps) { %>
       <% for(i = 0; i < peeps.length; i ++) { %>
-      <li class="peep list-group-item list-group-item-info"><%= peeps[i].content %> <span class="username"><%= peeps[i].username %></span></li>
+      <li class="peep list-group-item list-group-item-info"><%= peeps[i].content %> <span class="username"><%= peeps[i].username %> <%= timeago(peeps[i].date_added) %></span></li>
       <% } %>
     <% } %>
   </ul>

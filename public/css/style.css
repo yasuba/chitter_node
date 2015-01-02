@@ -25,11 +25,7 @@ h1 {
   margin-left: 5%;
 }
 
-a h1, a h1:hover {
-  text-decoration: none;
-}
-
-a:visited h1 {
+a, a:hover, a:visited {
   text-decoration: none;
   color: #000;
 }

@@ -12,7 +12,7 @@ Features:
 
 Notes:
 + Makers sign up to chitter with their password and a user name (i.e. s3cr3t, yasuba)
-+ The username is unique (to do)
++ The username is unique
 + Peeps (posts to chitter) have the name of the user
 + Use bcrypt to secure the passwords (to do)
 + Use postgres to save the data

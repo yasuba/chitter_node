@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var pg = require('pg');
 var engine = require('ejs-locals');
 var session = require('express-session');
+var timeago = require('timeago');
 
 if(process.env.NODE_ENV === 'testing') {
   var conString = "pg://maya:Sakura1981@localhost:5432/chittern_test";
@@ -28,7 +29,7 @@ app.get('/', function(request,response){
     var peeps = content.rows;
     peeps.sort(compare);
     var user = request.session.user;
-    response.render('index', {'user':user, 'peeps': peeps});
+    response.render('index', {'user':user, 'peeps': peeps, 'timeago': timeago});
   });
 });
 
@@ -58,7 +59,7 @@ app.post('/users', function(request, response){
           return console.error('error running query', err)
         }
         request.session.user = result.rows[0];
-        response.render('index', {'user':request.session.user, 'peeps': peeps});
+        response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
       });
     });
   });
@@ -82,7 +83,7 @@ app.post('/sessions', function(request, response){
       }
       if(result.rows[0]) {
         request.session.user = result.rows[0];
-        response.render('index', {'user':request.session.user, 'peeps': peeps});
+        response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
       }
       else {
         var noUser = 0;
@@ -97,7 +98,7 @@ app.post('/sessions/delete', function(request, response){
     var peeps = content.rows;
     peeps.sort(compare);
     request.session.user = undefined;
-    response.render('index', {'user':request.session.user, 'peeps': peeps});
+    response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
   });
 });
 
@@ -110,7 +111,7 @@ app.post('/post-peep', function(request, response){
     }
     var peeps = content.rows;
     peeps.sort(compare);
-    response.render('index', {'user': user, 'peeps': peeps});
+    response.render('index', {'user': user, 'peeps': peeps, 'timeago': timeago});
   });
 });
 
