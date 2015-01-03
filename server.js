@@ -9,6 +9,7 @@ var session = require('express-session');
 var timeago = require('timeago');
 var port = process.env.PORT || 3000;
 var User = require('./models/user.js')
+var Peep = require('./models/peep.js')
 
 if(process.env.NODE_ENV === 'testing') {
   var conString = process.env.DATABASE_URL || "pg://maya:Sakura1981@localhost:5432/chittern_test";
@@ -29,7 +30,8 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 app.get('/', function(request,response){
-  client.query("SELECT * FROM peeps", function(err, content){
+  var peep = new Peep(client);
+  peep.fetch(function(err, content){
     var peeps = content.rows;
     peeps.sort(compare);
     var user = request.session.user;
@@ -71,56 +73,58 @@ app.get('/sessions/new', function(request, response){
 });
 
 app.post('/sessions', function(request, response){
-  client.query("SELECT * FROM peeps", function(err, content){
+  var user = new User(client);
+  user.find(request.body.username, response, function(err, result){
     if(err) {
-      return console.error('error running query', err)
+      return console.error('error running query', err);
     }
-    var peeps = content.rows;
-    peeps.sort(compare);
-    var user = new User(client);
-    user.find(request.body.username, response, function(err, result){
-      if(err) {
-        return console.error('error running query', err);
-      }
-      if(result.rows[0]) {
-        var salt = result.rows[0].salt;
-        user.authenticate(request.body.password, salt);
-        if(user.newHash === result.rows[0].password) {
+    if(result.rows[0]) {
+      var salt = result.rows[0].salt;
+      user.authenticate(request.body.password, salt);
+      if(user.newHash === result.rows[0].password) {
           request.session.user = result.rows[0];
-          response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
-        }
-        else {
+          response.writeHead(302, {
+            'Location': '/'
+          });
+          response.end();
+        } else {
           var noUser = 0;
           response.render('sessions/new', {'noUser': noUser});
         }
-      }
-      else {
-        var noUser = 0;
-        response.render('sessions/new', {'noUser': noUser});
-      }
-    });
+    } else {
+      var noUser = 0;
+      response.render('sessions/new', {'noUser': noUser});
+    }
   });
 });
 
 app.post('/sessions/delete', function(request, response){
-  client.query("SELECT * FROM peeps", function(err, content){
+  var peep = new Peep(client);
+  peep.fetch(function(err, content){
     var peeps = content.rows;
     peeps.sort(compare);
     request.session.user = undefined;
-    response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
+    response.writeHead(302, {
+      'Location': '/'
+    });
+    response.end();
   });
 });
 
 app.post('/post-peep', function(request, response){
+  var peep = new Peep(client);
   var user = request.session.user;
-  client.query("INSERT INTO peeps(content, username, date_added) values($1, $2, CURRENT_TIMESTAMP)", [request.body.content, request.session.user.username]);
-  client.query("SELECT * FROM peeps", function(err, content){
+  peep.save(request.body.content, request.session.user.username);
+  peep.fetch(function(err, content){
     if(err) {
       return console.error('error running query', err);
     }
     var peeps = content.rows;
     peeps.sort(compare);
-    response.render('index', {'user': user, 'peeps': peeps, 'timeago': timeago});
+    response.writeHead(302, {
+      'Location': '/'
+    });
+    response.end();
   });
 });
 
