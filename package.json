@@ -4,7 +4,8 @@
   "description": "Messaging app",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "start": "node server.js",
+    "test": "grunt"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,10 @@
     "ejs-locals": "^1.0.2",
     "express": "^4.10.6",
     "express-session": "^1.9.3",
-    "pg": "^4.1.1"
+    "pg": "^4.1.1",
+    "timeago": "0.2.0"
+  },
+  "engines": {
+    "node": "0.10.32"
   }
 }

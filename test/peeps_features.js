@@ -9,6 +9,7 @@ describe('posting a peep', function(){
     casper.thenOpen('http://localhost:3000/',function(){
       casper.click('.sign-out');
     });
+
   });
 
   it('should display the peep once it is posted', function(){
