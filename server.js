@@ -20,7 +20,9 @@ client.connect();
 
 app.use(require('express').static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({secret: 'supersecret'}));
+app.use(session({secret: 'supersecret',
+                  saveUninitialized: true,
+                  resave: true}));
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
