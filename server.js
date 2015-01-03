@@ -28,7 +28,6 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 app.get('/', function(request,response){
-  console.log(process.env);
   client.query("SELECT * FROM peeps", function(err, content){
     var peeps = content.rows;
     peeps.sort(compare);
