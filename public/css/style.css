@@ -113,8 +113,12 @@ a, a:hover, a:visited {
   display: inline;
 }
 
+.peep-user {
+  font-size: 1.5em;
+}
+
 ul {
-  padding: 7% 0;
+  padding: 2.5% 0;
   margin-left: 45%;
   width: 45%;
 }

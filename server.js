@@ -7,15 +7,14 @@ var pg = require('pg');
 var engine = require('ejs-locals');
 var session = require('express-session');
 var timeago = require('timeago');
-var port = process.env.PORT || 3000;
-var User = require('./models/user.js')
-var Peep = require('./models/peep.js')
+var User = require('./models/user.js');
+var Peep = require('./models/peep.js');
 
 if(process.env.NODE_ENV === 'testing') {
-  var conString = process.env.DATABASE_URL || "pg://maya:Sakura1981@localhost:5432/chittern_test";
+  var conString = "pg://maya:Sakura1981@localhost:5432/chittern_test";
 } else {
-  var conString = process.env.DATABASE_URL || "pg://maya:Sakura1981@localhost:5432/chittern_development";
-}
+  var conString = "pg://maya:Sakura1981@localhost:5432/chittern_development";
+};
 
 var client = new pg.Client(conString);
 client.connect();
@@ -35,13 +34,23 @@ app.get('/', function(request,response){
     var peeps = content.rows;
     peeps.sort(compare);
     var user = request.session.user;
-    response.render('index', {'user':user, 'peeps': peeps, 'timeago': timeago});
+    response.render('index', {'user':user, 'peeps': peeps, 'timeago': timeago, 'params': request.params.name});
   });
 });
 
 app.get('/users/new', function(request,response){
   var userExist = 0;
   response.render('users/new', {'userExist': userExist});
+});
+
+app.get('/users/:name', function(request, response){
+  var peep = new Peep(client);
+  peep.sort(request.params.name, function(err, content){
+    var params = request.params.name;
+    var peeps = content.rows;
+    peeps.sort(compare);
+    response.render('index', {'user': request.session.user, 'peeps': peeps, 'timeago': timeago, 'params': params});
+  });
 });
 
 app.post('/users', function(request, response){
@@ -138,7 +147,7 @@ function compare(a,b){
   return 0;
 };
 
-server.listen(port, function(){
+server.listen(3000, function(){
   console.log('Server listening on port 3000');
 });
 

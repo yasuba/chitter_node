@@ -9,7 +9,6 @@ describe('posting a peep', function(){
     casper.thenOpen('http://localhost:3000/',function(){
       casper.click('.sign-out');
     });
-
   });
 
   it('should display the peep once it is posted', function(){
@@ -26,6 +25,22 @@ describe('posting a peep', function(){
     });
     casper.then(function(){
       expect('li').to.include.text("Hello world! Here's my Peep.");
+    });
+  });
+
+});
+
+describe('clicking on peeps', function(){
+  before(function(){
+    casper.start('http://localhost:3000');
+  });
+
+  it('should link to a list of peeps posted by the user who owns that peep', function(){
+    casper.then(function(){
+      casper.click('.username');
+    });
+    casper.then(function(){
+      expect('body').to.include.text("Hello world! Here's my Peep.");
     });
   });
 

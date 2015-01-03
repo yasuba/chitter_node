@@ -28,9 +28,14 @@
 
 <section id="peeps">
   <ul>
+  <% if(user !==undefined) { %>
+    <% if(params) { %>
+      <h3 class="peep-user"><%= params %>'s Peeps</h3>
+    <% } %>
+  <% } %>
     <% if(peeps) { %>
       <% for(i = 0; i < peeps.length; i ++) { %>
-      <li class="peep list-group-item list-group-item-info"><%= peeps[i].content %> <span class="username"><%= peeps[i].username %> <%= timeago(peeps[i].date_added) %></span></li>
+      <li class="peep list-group-item list-group-item-info"><%= peeps[i].content %> <% if(user !== undefined) { %><a href="/users/<%= peeps[i].username %>" ><% } %><span class="username"><%= peeps[i].username %></span><% { %></a><% } %> <%= timeago(peeps[i].date_added) %></li>
       <% } %>
     <% } %>
   </ul>
