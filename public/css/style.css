@@ -129,7 +129,13 @@ ul {
   color: #999;
 }
 
-footer {
-  margin-top: 30%;
-}
+footer.navbar-default.navbar-fixed-bottom {
+  background: #278f67;
+  color: #fff;
+  padding: 1em 0;
+ }
+
+ footer.navbar-default.navbar-fixed-bottom p {
+  margin: 0;
+ }
 
