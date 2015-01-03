@@ -8,11 +8,12 @@ var engine = require('ejs-locals');
 var session = require('express-session');
 var timeago = require('timeago');
 var bcrypt = require('bcrypt');
+var port = process.env.PORT || 3000;
 
 if(process.env.NODE_ENV === 'testing') {
-  var conString = "pg://maya:Sakura1981@localhost:5432/chittern_test";
+  var conString = process.env.DATABASE_URL || "pg://maya:Sakura1981@localhost:5432/chittern_test";
 } else {
-  var conString = "pg://maya:Sakura1981@localhost:5432/chittern_development";
+  var conString = process.env.DATABASE_URL || "pg://maya:Sakura1981@localhost:5432/chittern_development";
 }
 
 var client = new pg.Client(conString);
@@ -28,6 +29,7 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 app.get('/', function(request,response){
+  console.log(process.env)
   client.query("SELECT * FROM peeps", function(err, content){
     var peeps = content.rows;
     peeps.sort(compare);
@@ -138,7 +140,7 @@ function compare(a,b){
   return 0;
 };
 
-server.listen(3000, function(){
+server.listen(port, function(){
   console.log('Server listening on port 3000');
 });
 
