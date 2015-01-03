@@ -28,7 +28,7 @@ Notes:
 * EJS
 * Grunt
 
- For testing:
+For testing:
 * Casperjs
 * Mocha
 * Chai
@@ -44,4 +44,4 @@ To run Chitter, first you must have Node.js installed. Next clone this repositor
     git clone git@github.com:yasuba/chitter_node.git
     cd chitter_node
     npm install
-    npm start
+    node server.js
