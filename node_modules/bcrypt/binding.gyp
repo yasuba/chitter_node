@@ -7,9 +7,6 @@
         'src/bcrypt.cc',
         'src/bcrypt_node.cc'
       ],
-      'include_dirs' : [
-          "<!(node -e \"require('nan')\")"
-      ],
       'conditions': [
         [ 'OS=="win"', {
           'defines': [

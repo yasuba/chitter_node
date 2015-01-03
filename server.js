@@ -87,7 +87,8 @@ app.post('/sessions', function(request, response){
         return console.error('error running query', err);
       }
       if(result.rows[0]) {
-        var newHash = bcrypt.hashSync(request.body.password, result.rows[0].salt);
+        var salt = result.rows[0].salt
+        var newHash = bcrypt.hashSync(request.body.password, salt);
         if(newHash === result.rows[0].password) {
           request.session.user = result.rows[0];
           response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});

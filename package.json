@@ -27,7 +27,7 @@
     "phantomjs": "^1.9.12"
   },
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "0.7.x",
     "body-parser": "1.8",
     "ejs": "^1.0.0",
     "ejs-locals": "^1.0.2",
