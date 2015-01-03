@@ -7,8 +7,8 @@ var pg = require('pg');
 var engine = require('ejs-locals');
 var session = require('express-session');
 var timeago = require('timeago');
-var bcrypt = require('bcrypt');
 var port = process.env.PORT || 3000;
+var User = require('./models/user.js')
 
 if(process.env.NODE_ENV === 'testing') {
   var conString = process.env.DATABASE_URL || "pg://maya:Sakura1981@localhost:5432/chittern_test";
@@ -29,7 +29,6 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 app.get('/', function(request,response){
-  console.log(process.env)
   client.query("SELECT * FROM peeps", function(err, content){
     var peeps = content.rows;
     peeps.sort(compare);
@@ -44,30 +43,24 @@ app.get('/users/new', function(request,response){
 });
 
 app.post('/users', function(request, response){
-  var salt = bcrypt.genSaltSync(10);
-  var hash = bcrypt.hashSync(request.body.password, salt);
-  client.query("SELECT * FROM users WHERE username=$1", [request.body.username], function(err, result){
+  var user = new User(client);
+  user.find(request.body.username, response, function(err, result){
     if(err) {
       return console.error('error running query', err)
     }
     if(result.rowCount !== 0) {
-      var userExist = result
+      var userExist = result;
       response.render('users/new', {'userExist': userExist});
+      return;
     }
-    client.query("INSERT INTO users(username, password, salt) values($1, $2, $3)", [request.body.username, hash, salt]);
-    client.query("SELECT * FROM peeps", function(err, content){
-      if(err) {
-        return console.error('error running query', err)
-      }
-      var peeps = content.rows;
-      peeps.sort(compare);
-      client.query("SELECT * FROM users WHERE username=$1", [request.body.username], function(err,result){
-        if(err) {
-          return console.error('error running query', err)
-        }
-        request.session.user = result.rows[0];
-        response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
+    user.save(request.body.username, request.body.password, function(err, data){
+      request.session.user = {
+        "username": request.body.username
+      };
+      response.writeHead(302, {
+        'Location': '/'
       });
+      response.end();
     });
   });
 });
@@ -84,14 +77,15 @@ app.post('/sessions', function(request, response){
     }
     var peeps = content.rows;
     peeps.sort(compare);
-    client.query("SELECT * FROM users WHERE username=$1", [request.body.username], function(err,result){
+    var user = new User(client);
+    user.find(request.body.username, response, function(err, result){
       if(err) {
         return console.error('error running query', err);
       }
       if(result.rows[0]) {
-        var salt = result.rows[0].salt
-        var newHash = bcrypt.hashSync(request.body.password, salt);
-        if(newHash === result.rows[0].password) {
+        var salt = result.rows[0].salt;
+        user.authenticate(request.body.password, salt);
+        if(user.newHash === result.rows[0].password) {
           request.session.user = result.rows[0];
           response.render('index', {'user':request.session.user, 'peeps': peeps, 'timeago': timeago});
         }
