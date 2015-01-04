@@ -8,13 +8,13 @@ describe('a user signing up', function(){
   it('can create a new account', function(){
     casper.then(function(){
       // console.log(casper.getCurrentUrl());
-      // casper.debugPage()
       casper.fill('form[action="/users"]', {
         username: "Bob",
         password: "password"
       }, true)
     });
     casper.then(function(){
+      // casper.debugPage()
       expect('h3').to.include.text('Hello Bob');
     });
   });
