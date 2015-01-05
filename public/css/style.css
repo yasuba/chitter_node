@@ -42,10 +42,14 @@ a, a:hover, a:visited {
   margin-left: 5%;
 }
 
+a.sign-up, a.sign-in {
+  color: #fff;
+}
+
 h2.log {
   font-size: 1.5em;
   display: inline;
-  margin-left: 50%;
+  margin: 0 2% 0 45%;
 }
 
 .logout {
@@ -88,9 +92,8 @@ h2.log {
 }
 
 #write-peep {
-  padding: 5% 0 0;
+  padding: 5% 0 0 5%;
   width: 40%;
-  margin-left: 7%;
   float: left;
 }
 
@@ -104,7 +107,7 @@ h2.log {
 
 #write-peep input {
   margin-left: 15%;
-  width: 250px;
+  width: 350px;
   padding: 8%;
   border-radius: 5px;
   font-size: 1.25em;
@@ -116,11 +119,14 @@ h2.log {
 
 .peep-user {
   font-size: 1.5em;
+  width: 50%;
+  float: left;
+  margin: -9% 0 0 22%;
 }
 
 ul {
   padding: 2.5% 0;
-  margin: 5% 0 0 45%;
+  margin: 4% 0 0 45%;
   width: 45%;
 }
 

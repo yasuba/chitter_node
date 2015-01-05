@@ -1,16 +1,16 @@
 <% layout('layout') -%>
 
 <% if(user === undefined) { %>
-<h2 class="log">Login</h2>
 <section class="logins">
+  <h2 class="log">Login</h2>
   <a href="/users/new" class="sign-up btn btn-default">Sign Up</a>
   <a href="/sessions/new" class="sign-in btn btn-default">Sign In</a>
 </section>
 <img width="150" class="home-bird" src="../images/bird.png" alt="Bird">
 
 <% } else { %>
-<h2 class="log">Logout</h2>
 <section class="logins">
+  <h2 class="log">Logout</h2>
   <form class="logout" method="post" action="/sessions/delete">
     <button class="sign-out btn btn-default">Sign out</button>
   </form>
@@ -27,8 +27,12 @@
 <% } %>
 
 <section id="peeps">
+  <% if(user !==undefined) { %>
+    <% if(params) { %>
+      <h3 class="peep-user"><%= params %>'s Peeps</h3>
+    <% } %>
+  <% } %>
   <ul>
-
     <% if(peeps) { %>
       <% for(i = 0; i < peeps.length; i ++) { %>
       <li class="list-group-item list-group-item-info">
