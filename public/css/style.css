@@ -137,5 +137,6 @@ footer.navbar-default.navbar-fixed-bottom {
 
  footer.navbar-default.navbar-fixed-bottom p {
   margin: 0;
+  float: right;
  }
 
