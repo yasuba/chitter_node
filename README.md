@@ -27,6 +27,7 @@ Notes:
 * Express
 * EJS
 * Grunt
+* PostgreSQL
 
 For testing:
 * Casperjs
@@ -45,3 +46,7 @@ To run Chitter, first you must have Node.js installed. Next clone this repositor
     cd chitter_node
     npm install
     node server.js
+
+###View the app online
+
+Check it out here: https://chitter-node.herokuapp.com/
