@@ -4,7 +4,6 @@
   "description": "Messaging app",
   "main": "index.ejs",
   "scripts": {
-    "start": "node server.js",
     "test": "grunt"
   },
   "repository": {
