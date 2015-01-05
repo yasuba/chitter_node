@@ -22,7 +22,7 @@ body {
 
 h1 {
   display: inline;
-  margin-left: -40%;
+  margin-left: 5%;
 }
 
 a, a:hover, a:visited {
@@ -37,14 +37,15 @@ a, a:hover, a:visited {
 }
 
 .logins {
-  float: right;
+  display: inline;
   width: 25%;
+  margin-left: 5%;
 }
 
-.logins h2 {
+h2.log {
   font-size: 1.5em;
   display: inline;
-  margin-right: 10%;
+  margin-left: 50%;
 }
 
 .logout {
@@ -119,7 +120,7 @@ a, a:hover, a:visited {
 
 ul {
   padding: 2.5% 0;
-  margin-left: 45%;
+  margin: 5% 0 0 45%;
   width: 45%;
 }
 

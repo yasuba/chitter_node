@@ -3,9 +3,10 @@ var app = express();
 var server = require('http').createServer(app);
 var path = require('path');
 var bodyParser = require('body-parser');
-var pg = require('pg');
-//   , cfg = require('../config')
-//   , conString = "pg://"+login+"localhost:5432/"+cfg.postgres.db;
+var pg = require('pg')
+//   , cfg = require('./config/')
+  , conString = process.env.DATABASE_URL || 'postgres://localhost:5432/chittern_development'
+  , client;
 var engine = require('ejs-locals');
 var session = require('express-session');
 var timeago = require('timeago');
@@ -13,12 +14,10 @@ var User = require('./models/user.js');
 var Peep = require('./models/peep.js');
 
 if(process.env.NODE_ENV === 'testing') {
-  process.env.DATABASE_URL = "pg://maya:Sakura1981@localhost:5432/chittern_test";
-} else {
-  process.env.DATABASE_URL = "pg://maya:Sakura1981@localhost:5432/chittern_development";
-};
+  var conString = "postgres://localhost:5432/chittern_test";
+}
 
-var client = new pg.Client(process.env.DATABASE_URL);
+client = new pg.Client(conString);
 client.connect();
 
 app.use(require('express').static('public'));
