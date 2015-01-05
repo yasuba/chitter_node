@@ -148,8 +148,9 @@ function compare(a,b){
   return 0;
 };
 
-server.listen(3000, function(){
-  console.log('Server listening on port 3000');
+var server_port = process.env.PORT || 3000;
+server.listen(server_port, function(){
+  console.log('Server listening on port', server_port);
 });
 
 module.exports = server;
