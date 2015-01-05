@@ -28,6 +28,7 @@
     "phantomjs": "^1.9.12"
   },
   "dependencies": {
+    "grunt": "^0.4.5",
     "bcrypt": "0.7.x",
     "body-parser": "1.8",
     "ejs": "^1.0.0",
