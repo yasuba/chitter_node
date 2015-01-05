@@ -30,7 +30,7 @@ describe('posting a peep', function(){
 
 });
 
-describe('clicking on peeps', function(){
+describe('clicking on peep usernames', function(){
   before(function(){
     casper.start('http://localhost:3000');
   });
@@ -44,4 +44,19 @@ describe('clicking on peeps', function(){
     });
   });
 
+});
+
+describe('clicking on peeps', function(){
+  before(function(){
+    casper.start('http://localhost:3000');
+  });
+
+  it('should allow a user to write a comment', function(){
+    casper.then(function(){
+      casper.click('.peep');
+    });
+    casper.then(function(){
+      expect('body').to.include.text("Write a comment.");
+    });
+  });
 });
