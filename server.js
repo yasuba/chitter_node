@@ -13,12 +13,12 @@ var User = require('./models/user.js');
 var Peep = require('./models/peep.js');
 
 if(process.env.NODE_ENV === 'testing') {
-  var conString = "pg://maya:Sakura1981@localhost:5432/chittern_test";
+  process.env.DATABASE_URL = "pg://maya:Sakura1981@localhost:5432/chittern_test";
 } else {
-  var conString = "pg://maya:Sakura1981@localhost:5432/chittern_development";
+  process.env.DATABASE_URL = "pg://maya:Sakura1981@localhost:5432/chittern_development";
 };
 
-var client = new pg.Client(conString);
+var client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 
 app.use(require('express').static('public'));
