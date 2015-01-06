@@ -4,6 +4,8 @@
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="../css/style.css">
   <title>Chitter: a Node.js app</title>
+  <script src="../javascript/jquery-2.1.1.min.js"></script>
+  <script src="../javascript/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -15,11 +17,9 @@
     </div>
   </footer>
 
-<script src="../javascript/jquery-2.1.1.min.js"></script>
-<script src="../javascript/bootstrap.min.js"></script>
 <script>
   $('#myModal').on('shown.bs.modal', function () {
-      $('#myInput').focus()
+      $('#message-text').focus()
     })
   </script>
 </body>

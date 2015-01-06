@@ -53,10 +53,25 @@ describe('clicking on peeps', function(){
 
   it('should allow a user to write a comment', function(){
     casper.then(function(){
-      casper.click('.peep');
+      casper.thenOpen('http://localhost:3000/sessions/new');
+      userHelper('Bob', 'password');
     });
     casper.then(function(){
+      casper.click('.peep');
       expect('body').to.include.text("Write a comment.");
     });
   });
+
+  it('should allow user to send their comment to another user', function(){
+    casper.then(function(){
+      casper.fill('form[class="send-message"]', {
+        message: "Hello Maya, how's it going?"
+      }, true)
+    });
+    casper.then(function(){
+      console.log(casper.getCurrentUrl())
+      // expect('body').to.include.text("Hello Maya, how's it going?");
+    });
+  });
+
 });

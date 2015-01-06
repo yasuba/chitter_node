@@ -38,8 +38,6 @@ a, a:hover, a:visited {
 
 .logins {
   display: inline;
-  width: 25%;
-  margin-left: 5%;
 }
 
 a.sign-up, a.sign-in {
@@ -107,7 +105,7 @@ h2.log {
 
 #write-peep input {
   margin-left: 15%;
-  width: 350px;
+  width: 250px;
   padding: 8%;
   border-radius: 5px;
   font-size: 1.25em;
@@ -121,12 +119,12 @@ h2.log {
   font-size: 1.5em;
   width: 50%;
   float: left;
-  margin: -9% 0 0 22%;
+  margin: -9% 0 0 19%;
 }
 
 ul {
   padding: 2.5% 0;
-  margin: 4% 0 0 45%;
+  margin: 6% 0 0 45%;
   width: 45%;
 }
 

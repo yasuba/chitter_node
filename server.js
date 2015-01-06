@@ -50,9 +50,21 @@ app.get('/users/:name', function(request, response){
     var params = request.params.name;
     var peeps = content.rows;
     peeps.sort(compare);
-    response.render('index', {'user': request.session.user, 'peeps': peeps, 'timeago': timeago, 'params': params});
+    var message = request.body.message;
+    response.render('index', {'user': request.session.user, 'peeps': peeps, 'timeago': timeago, 'params': params, 'message': message});
   });
 });
+
+  app.post('/users/:name', function(request,response){
+    request.session.user = {
+      "message": request.body.message
+    };
+    response.writeHead(302, {
+      'Location': '/users/new'
+    });
+    response.end();
+    // response.render('users/:name', {'message': request.body.message});
+  });
 
 app.post('/users', function(request, response){
   var user = new User(client);

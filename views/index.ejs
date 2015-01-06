@@ -37,8 +37,12 @@
       <% for(i = 0; i < peeps.length; i ++) { %>
       <li class="list-group-item list-group-item-info">
       <% if(user !== undefined) { %>
-      <a href="#" data-toggle="modal" data-target="#myModal" class="peep">
-
+      <a href="#myModal" data-toggle="modal" data-target="#myModal" class="peep">
+        <script>
+          $('.send').on('click', function(){
+            window.location = '/users/<%= peeps[i].username %>'
+          });
+        </script>
       <!-- Modal -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -47,13 +51,17 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="myModalLabel">Reply to &#64;<%=peeps[i].username %></h4>
             </div>
-            <div class="modal-body">
-              Write a comment.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form class="send-message" method="" action="/users/:name">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="message-text" class="control-label">Write a comment.</label>
+                  <textarea name="message" class="form-control" id="message-text"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="send btn btn-primary">Send</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -62,4 +70,4 @@
       <% } %>
     <% } %>
   </ul>
-  </section>
+</section>
