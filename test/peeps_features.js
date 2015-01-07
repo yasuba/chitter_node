@@ -65,12 +65,19 @@ describe('clicking on peeps', function(){
   it('should allow user to send their comment to another user', function(){
     casper.then(function(){
       casper.fill('form[class="send-message"]', {
-        message: "Hello Maya, how's it going?"
+      comment: "Hello Maya, how's it going?"
       }, true)
     });
     casper.then(function(){
-      console.log(casper.getCurrentUrl());
       expect('body').to.include.text("Hello Maya, how's it going?");
+    });
+  });
+
+  it("should only display comments on the recipient's page", function(){
+    casper.thenOpen('http://localhost:3000',function(){
+    });
+    casper.then(function(){
+      expect('body').not.to.include.text("Hello Maya, how's it going?");
     });
   });
 

@@ -6,7 +6,7 @@ Peep.prototype.fetch = function(callback){
   this.client.query("SELECT * FROM peeps", callback);
 };
 
-Peep.prototype.sort = function(username, callback){
+Peep.prototype.findByUser = function(username, callback){
   this.client.query("SELECT * FROM peeps WHERE username=$1", [username], callback)
 };
 

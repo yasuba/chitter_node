@@ -10,7 +10,7 @@ User.prototype.save = function(username, password, callback){
   this.client.query("INSERT INTO users(username, password, salt) values($1, $2, $3)", [username, hash, this.salt], callback)
 };
 
-User.prototype.find = function(username, response, callback){
+User.prototype.findByName = function(username, response, callback){
   this.client.query("SELECT * FROM users WHERE username=$1", [username], callback)
 };
 

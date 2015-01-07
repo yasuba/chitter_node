@@ -51,7 +51,7 @@ app.get('/users/new', function(request,response){
 
 app.get('/users/:name', function(request, response){
   var peep = new Peep(client);
-  peep.sort(request.params.name, function(err, content){
+  peep.findByUser(request.params.name, function(err, content){
     var params = request.params.name;
     var peeps = content.rows;
     peeps.sort(compare);
@@ -65,7 +65,7 @@ app.get('/users/:name', function(request, response){
 
   app.post('/users/:name', function(request,response){
     var peep = new Peep(client);
-    peep.sort(request.params.name, function(err, content){
+    peep.findByUser(request.params.name, function(err, content){
       var params = request.params.name;
       var peeps = content.rows;
       peeps.sort(compare);
@@ -73,7 +73,7 @@ app.get('/users/:name', function(request, response){
         var peep_id = peeps[i].id;
       }
       comment = new Comment(client);
-      comment.save(request.body.message, peep_id, request.session.user.id);
+      comment.save(request.body.comment, peep_id, request.session.user.id);
       comment.fetch(function(err, comment){
         var comments = comment.rows;
         response.render('index', {'user': request.session.user, 'peeps': peeps, 'timeago': timeago, 'params': params, 'comments': comments});
@@ -83,7 +83,7 @@ app.get('/users/:name', function(request, response){
 
 app.post('/users', function(request, response){
   var user = new User(client);
-  user.find(request.body.username, response, function(err, result){
+  user.findByName(request.body.username, response, function(err, result){
     if(err) {
       return console.error('error running query', err)
     }
@@ -111,7 +111,7 @@ app.get('/sessions/new', function(request, response){
 
 app.post('/sessions', function(request, response){
   var user = new User(client);
-  user.find(request.body.username, response, function(err, result){
+  user.findByName(request.body.username, response, function(err, result){
     if(err) {
       return console.error('error running query', err);
     }
