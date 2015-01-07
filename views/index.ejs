@@ -27,7 +27,7 @@
 <% } %>
 
 <section id="peeps">
-  <% if(user !==undefined) { %>
+  <% if(user !== undefined) { %>
     <% if(params) { %>
       <h3 class="peep-user"><%= params %>'s Peeps</h3>
     <% } %>
@@ -38,11 +38,6 @@
       <li class="list-group-item list-group-item-info">
       <% if(user !== undefined) { %>
       <a href="#myModal" data-toggle="modal" data-target="#myModal" class="peep">
-        <script>
-          $('.send').on('click', function(){
-            window.location = '/users/<%= peeps[i].username %>'
-          });
-        </script>
       <!-- Modal -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -51,7 +46,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title" id="myModalLabel">Reply to &#64;<%=peeps[i].username %></h4>
             </div>
-            <form class="send-message" method="" action="/users/:name">
+            <form class="send-message" method="post" action="/users/<%=peeps[i].username%>">
               <div class="modal-body">
                 <div class="form-group">
                   <label for="message-text" class="control-label">Write a comment.</label>
@@ -59,7 +54,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="send btn btn-primary">Send</button>
+                <input type="submit" class="send btn btn-primary" value="Send">
               </div>
             </form>
           </div>
@@ -67,7 +62,17 @@
       </div>
       <% } %>
       <%= peeps[i].content %></a> <% if(user !== undefined) { %><a href="/users/<%= peeps[i].username %>" ><% } %><span class="username"><%= peeps[i].username %></span><% { %></a><% } %> <%= timeago(peeps[i].date_added) %></li>
+        <% if(comments) { %>
+          <% for(i = 0; i < comments.length; i ++) { %>
+            <li class="list-group-item list-group-item-info"><%= comments[i].comment %></li>
+          <% } %>
+        <% } %>
       <% } %>
     <% } %>
   </ul>
 </section>
+<script type="text/javascript">
+  $('.send').on('click', function(){
+    $('.send-message').submit();
+  });
+</script>

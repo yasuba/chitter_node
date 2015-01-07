@@ -12,6 +12,7 @@ var session = require('express-session');
 var timeago = require('timeago');
 var User = require('./models/user.js');
 var Peep = require('./models/peep.js');
+var Comment = require('./models/comment.js');
 
 if(process.env.NODE_ENV === 'testing') {
   var conString = "postgres://localhost:5432/chittern_test";
@@ -30,12 +31,16 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 app.get('/', function(request,response){
-  var peep = new Peep(client);
-  peep.fetch(function(err, content){
-    var peeps = content.rows;
-    peeps.sort(compare);
-    var user = request.session.user;
-    response.render('index', {'user':user, 'peeps': peeps, 'timeago': timeago, 'params': request.params.name});
+    var peep = new Peep(client);
+    peep.fetch(function(err, content){
+      var peeps = content.rows;
+      peeps.sort(compare);
+      var user = request.session.user;
+      var comment = new Comment(client);
+      comment.fetch(function(err, comment){
+        var comments = comment.rows;
+      response.render('index', {'user':user, 'peeps': peeps, 'timeago': timeago, 'params': request.params.name, 'comments': comments});
+    });
   });
 });
 
@@ -50,20 +55,30 @@ app.get('/users/:name', function(request, response){
     var params = request.params.name;
     var peeps = content.rows;
     peeps.sort(compare);
-    var message = request.body.message;
-    response.render('index', {'user': request.session.user, 'peeps': peeps, 'timeago': timeago, 'params': params, 'message': message});
+    var comment = new Comment(client);
+    comment.fetch(function(err, comment){
+      var comments = comment.rows;
+      response.render('index', {'user': request.session.user, 'peeps': peeps, 'timeago': timeago, 'params': params, 'comments': comments});
+    });
   });
 });
 
   app.post('/users/:name', function(request,response){
-    request.session.user = {
-      "message": request.body.message
-    };
-    response.writeHead(302, {
-      'Location': '/users/new'
+    var peep = new Peep(client);
+    peep.sort(request.params.name, function(err, content){
+      var params = request.params.name;
+      var peeps = content.rows;
+      peeps.sort(compare);
+      for(i=0; i< peeps.length; i++){
+        var peep_id = peeps[i].id;
+      }
+      comment = new Comment(client);
+      comment.save(request.body.message, peep_id, request.session.user.id);
+      comment.fetch(function(err, comment){
+        var comments = comment.rows;
+        response.render('index', {'user': request.session.user, 'peeps': peeps, 'timeago': timeago, 'params': params, 'comments': comments});
+      });
     });
-    response.end();
-    // response.render('users/:name', {'message': request.body.message});
   });
 
 app.post('/users', function(request, response){

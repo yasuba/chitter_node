@@ -69,8 +69,8 @@ describe('clicking on peeps', function(){
       }, true)
     });
     casper.then(function(){
-      console.log(casper.getCurrentUrl())
-      // expect('body').to.include.text("Hello Maya, how's it going?");
+      console.log(casper.getCurrentUrl());
+      expect('body').to.include.text("Hello Maya, how's it going?");
     });
   });
 
