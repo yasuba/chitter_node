@@ -122,10 +122,21 @@ h2.log {
   margin: -9% 0 0 19%;
 }
 
-ul {
+ul.peeps-list {
   padding: 2.5% 0;
   margin: 6% 0 0 45%;
   width: 45%;
+}
+
+ul.comments {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.comments li {
+  border: 0;
+  margin-left: -15px;
 }
 
 .username {

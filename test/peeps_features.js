@@ -62,9 +62,9 @@ describe('clicking on peeps', function(){
     });
   });
 
-  it('should allow user to send their comment to another user', function(){
+  it('should post the comment to the peep after sending', function(){
     casper.then(function(){
-      casper.fill('form[class="send-message"]', {
+      casper.fill('form[class="send-comment"]', {
       comment: "Hello Maya, how's it going?"
       }, true)
     });
@@ -73,12 +73,12 @@ describe('clicking on peeps', function(){
     });
   });
 
-  it("should only display comments on the recipient's page", function(){
-    casper.thenOpen('http://localhost:3000',function(){
-    });
-    casper.then(function(){
-      expect('body').not.to.include.text("Hello Maya, how's it going?");
-    });
-  });
+  // it("should only display comments on the recipient's page", function(){
+  //   casper.thenOpen('http://localhost:3000',function(){
+  //   });
+  //   casper.then(function(){
+  //     expect('body').not.to.include.text("Hello Maya, how's it going?");
+  //   });
+  // });
 
 });

@@ -63,20 +63,19 @@ app.get('/users/:name', function(request, response){
   });
 });
 
-  app.post('/users/:name', function(request,response){
+  app.post('/comment', function(request,response){
     var peep = new Peep(client);
     peep.findByUser(request.params.name, function(err, content){
-      var params = request.params.name;
       var peeps = content.rows;
-      peeps.sort(compare);
-      for(i=0; i< peeps.length; i++){
-        var peep_id = peeps[i].id;
-      }
-      comment = new Comment(client);
-      comment.save(request.body.comment, peep_id, request.session.user.id);
-      comment.fetch(function(err, comment){
-        var comments = comment.rows;
-        response.render('index', {'user': request.session.user, 'peeps': peeps, 'timeago': timeago, 'params': params, 'comments': comments});
+      var comment = new Comment(client);
+      comment.save(request.body.comment, request.body.peepid, request.session.user.id, function(err, data){
+        if(err) {
+          return console.error('error running query', err)
+        }
+        response.writeHead(302, {
+          'Location': '/'
+        });
+        response.end();
       });
     });
   });

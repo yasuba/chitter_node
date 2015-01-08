@@ -32,12 +32,7 @@
       <h3 class="peep-user"><%= params %>'s Peeps</h3>
     <% } %>
   <% } %>
-  <ul>
-    <% if(comments) { %>
-      <% for(i = 0; i < comments.length; i ++) { %>
-        <li class="list-group-item list-group-item-info"><%= comments[i].comment %></li>
-      <% } %>
-    <% } %>
+  <ul class="peeps-list">
     <% if(peeps) { %>
       <% for(i = 0; i < peeps.length; i ++) { %>
       <li class="list-group-item list-group-item-info">
@@ -51,11 +46,12 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title" id="myModalLabel">Reply to &#64;<%=peeps[i].username %></h4>
                 </div>
-                <form class="send-message" method="post" action="/users/<%=peeps[i].username%>">
+                <form class="send-comment" method="post" action="/comment">
                   <div class="modal-body">
                     <div class="form-group">
                       <label for="message-text" class="control-label">Write a comment.</label>
                       <textarea name="comment" class="form-control" id="message-text"></textarea>
+                      <textarea type="hidden" name="peepid"><%= peeps[i].id%></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -67,6 +63,16 @@
           </div>
         <% } %>
         <%= peeps[i].content %></a> <% if(user !== undefined) { %><a href="/users/<%= peeps[i].username %>" ><% } %><span class="username"><%= peeps[i].username %></span><% { %></a><% } %> <%= timeago(peeps[i].date_added) %>
+        <% var peep_id = peeps[i].id %>
+        <ul class="comments">
+          <% if(comments) { %>
+            <% for(i = 0; i < comments.length; i ++) { %>
+              <% if(comments[i].peep_id === peep_id) { %>
+                <li class="list-group-item list-group-item-info"><%= comments[i].comment %></li>
+              <% } %>
+            <% } %>
+          <% } %>
+        </ul>
       </li>
       <% } %>
     <% } %>
@@ -74,6 +80,6 @@
 </section>
 <script type="text/javascript">
   $('.send').on('click', function(){
-    $('.send-message').submit();
+    $('.send-comment').submit();
   });
 </script>
