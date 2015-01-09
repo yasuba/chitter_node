@@ -68,7 +68,7 @@
           <% if(comments) { %>
             <% for(i = 0; i < comments.length; i ++) { %>
               <% if(comments[i].peep_id === peep_id) { %>
-                <li class="list-group-item list-group-item-info"><%= comments[i].comment %></li>
+                <li class="list-group-item list-group-item-info"><%= comments[i].comment %> <span class="username"><%= comments[i].username %></span> <%= timeago(comments[i].date_added) %></li>
               <% } %>
             <% } %>
           <% } %>

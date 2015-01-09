@@ -31,14 +31,14 @@ app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 app.get('/', function(request,response){
-    var peep = new Peep(client);
-    peep.fetch(function(err, content){
-      var peeps = content.rows;
-      peeps.sort(compare);
-      var user = request.session.user;
-      var comment = new Comment(client);
-      comment.fetch(function(err, comment){
-        var comments = comment.rows;
+  var peep = new Peep(client);
+  peep.fetch(function(err, content){
+    var peeps = content.rows;
+    peeps.sort(compare);
+    var user = request.session.user;
+    var comment = new Comment(client);
+    comment.fetch(function(err, comment){
+      var comments = comment.rows;
       response.render('index', {'user':user, 'peeps': peeps, 'timeago': timeago, 'params': request.params.name, 'comments': comments});
     });
   });
@@ -68,7 +68,7 @@ app.get('/users/:name', function(request, response){
     peep.findByUser(request.params.name, function(err, content){
       var peeps = content.rows;
       var comment = new Comment(client);
-      comment.save(request.body.comment, request.body.peepid, request.session.user.id, function(err, data){
+      comment.save(request.body.comment, request.body.peepid, request.session.user.username, function(err, data){
         if(err) {
           return console.error('error running query', err)
         }
@@ -157,11 +157,11 @@ app.post('/post-peep', function(request, response){
     }
     var peeps = content.rows;
     peeps.sort(compare);
+      });
     response.writeHead(302, {
       'Location': '/'
     });
     response.end();
-  });
 });
 
 function compare(a,b){

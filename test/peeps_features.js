@@ -28,6 +28,19 @@ describe('posting a peep', function(){
     });
   });
 
+  it('should allow another user to post a peep', function(){
+    casper.click('.sign-out');
+    casper.waitForUrl('http://localhost:3000', function(){
+      casper.click('.sign-up');
+      userHelper('Maya', 'password');
+    });
+    casper.then(function(){
+      casper.fill('form[action="/post-peep"]', {
+        content: "Hello world! Here's another Peep."
+      }, true)
+    });
+  });
+
 });
 
 describe('clicking on peep usernames', function(){

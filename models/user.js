@@ -18,4 +18,8 @@ User.prototype.authenticate = function(password, salt){
   this.newHash = bcrypt.hashSync(password, salt);
 };
 
+User.prototype.findById = function(user_id, callback){
+  this.client.query("SELECT * FROM users WHERE id=$1", [user_id], callback)
+};
+
 module.exports = User;
