@@ -122,6 +122,10 @@ h2.log {
   margin: -9% 0 0 19%;
 }
 
+.peepid {
+  display: none;
+}
+
 ul.peeps-list {
   padding: 2.5% 0;
   margin: 6% 0 0 45%;

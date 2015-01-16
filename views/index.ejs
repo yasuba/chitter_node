@@ -34,7 +34,9 @@
   <% } %>
   <ul class="peeps-list">
     <% if(peeps) { %>
-      <% for(i = 0; i < peeps.length; i ++) { %>
+
+      <% peeps.forEach(function(entry){ %>
+
       <li class="list-group-item list-group-item-info">
         <% if(user !== undefined) { %>
           <a href="#myModal" data-toggle="modal" data-target="#myModal" class="peep">
@@ -44,14 +46,14 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Reply to &#64;<%=peeps[i].username %></h4>
+                  <h4 class="modal-title" id="myModalLabel">Reply to &#64;<%=entry.username %></h4>
                 </div>
                 <form class="send-comment" method="post" action="/comment">
                   <div class="modal-body">
                     <div class="form-group">
                       <label for="message-text" class="control-label">Write a comment.</label>
                       <textarea name="comment" class="form-control" id="message-text"></textarea>
-                      <textarea type="hidden" name="peepid"><%= peeps[i].id%></textarea>
+                      <textarea class="peepid" name="peepid"><%= entry.id%></textarea>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -62,21 +64,14 @@
             </div>
           </div>
         <% } %>
-        <%= peeps[i].content %></a> <% if(user !== undefined) { %><a href="/users/<%= peeps[i].username %>" ><% } %><span class="username"><%= peeps[i].username %></span><% { %></a><% } %> <%= timeago(peeps[i].date_added) %>
-        <% var peep_id = peeps[i].id %>
-        <ul class="comments">
-          <% if(comments) { %>
-            <% for(i = 0; i < comments.length; i ++) { %>
-              <% if(comments[i].peep_id === peep_id) { %>
-                <li class="list-group-item list-group-item-info"><%= comments[i].comment %> <span class="username"><%= comments[i].username %></span> <%= timeago(comments[i].date_added) %></li>
-              <% } %>
-            <% } %>
-          <% } %>
-        </ul>
+        <%= entry.content %></a> <% if(user !== undefined) { %><a href="/users/<%= entry.username %>" ><% } %><span class="username"><%= entry.username %></span><% { %></a><% } %> <%= timeago(entry.date_added) %>
       </li>
-      <% } %>
+
+      <% }) %>
+
     <% } %>
   </ul>
+
 </section>
 <script type="text/javascript">
   $('.send').on('click', function(){
