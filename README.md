@@ -47,6 +47,8 @@ To run Chitter, first you must have Node.js installed. Next clone this repositor
     npm install
     node server.js
 
+As I'm not using an ORM, I currently have not got a way to easily create and migrate databases, so if you want to run Chitter, you'll have to create your own! The database has the tables users, peeps and comments. (Obviously this is something I plan to work on).
+
 ###View the app online
 
 Check it out here: https://chitter-node.herokuapp.com/
