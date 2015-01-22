@@ -63,20 +63,24 @@ app.get('/users/:name', function(request, response){
   });
 });
 
-  app.post('/comment', function(request,response){
+  app.get('/comments/:id', function(request, response){
     var peep = new Peep(client);
-    peep.findByUser(request.params.name, function(err, content){
-      var peeps = content.rows;
-      var comment = new Comment(client);
-      comment.save(request.body.comment, request.body.peepid, request.session.user.username, function(err, data){
-        if(err) {
-          return console.error('error running query', err)
-        }
-        response.writeHead(302, {
-          'Location': '/'
-        });
-        response.end();
+    peep.findById(request.params.id, function(err, content){
+      peep_id = content.rows[0].id;
+      response.render('comments/new', {'peep_id': peep_id});
+    });
+  })
+
+  app.post('/comment', function(request,response){
+    var comment = new Comment(client);
+    comment.save(request.body.comment, request.body.peepid, request.session.user.username, function(err, data){
+      if(err) {
+        return console.error('error running query', err)
+      }
+      response.writeHead(302, {
+        'Location': '/'
       });
+      response.end();
     });
   });
 

@@ -1,0 +1,11 @@
+<% layout('../layout') -%>
+
+<form class="send-comment" method="post" action="/comment">
+
+  <label for="message-text" class="control-label">Write a comment</label>
+  <textarea name="comment" class="form-control" id="message-text"></textarea>
+  <textarea class="peepid" name="peepid"><%= peep_id %></textarea>
+  <div class="comment-footer">
+    <input type="submit" class="send btn btn-primary" value="Send">
+  </div>
+</form>

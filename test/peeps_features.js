@@ -71,7 +71,9 @@ describe('clicking on peeps', function(){
     });
     casper.then(function(){
       casper.click('.peep');
-      expect('body').to.include.text("Write a comment.");
+    });
+    casper.then(function(){
+      expect('body').to.include.text("Write a comment");
     });
   });
 
@@ -85,13 +87,5 @@ describe('clicking on peeps', function(){
       expect('body').to.include.text("Hello Maya, how's it going?");
     });
   });
-
-  // it("should only display comments on the recipient's page", function(){
-  //   casper.thenOpen('http://localhost:3000',function(){
-  //   });
-  //   casper.then(function(){
-  //     expect('body').not.to.include.text("Hello Maya, how's it going?");
-  //   });
-  // });
 
 });

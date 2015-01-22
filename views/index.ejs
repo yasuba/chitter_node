@@ -34,47 +34,23 @@
   <% } %>
   <ul class="peeps-list">
     <% if(peeps) { %>
-
       <% peeps.forEach(function(entry){ %>
-
-      <li class="list-group-item list-group-item-info">
-        <% if(user !== undefined) { %>
-          <a href="#myModal" data-toggle="modal" data-target="#myModal" class="peep">
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Reply to &#64;<%=entry.username %></h4>
-                </div>
-                <form class="send-comment" method="post" action="/comment">
-                  <div class="modal-body">
-                    <div class="form-group">
-                      <label for="message-text" class="control-label">Write a comment.</label>
-                      <textarea name="comment" class="form-control" id="message-text"></textarea>
-                      <textarea class="peepid" name="peepid"><%= entry.id%></textarea>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <input type="submit" class="send btn btn-primary" value="Send">
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        <% } %>
-        <%= entry.content %></a> <% if(user !== undefined) { %><a href="/users/<%= entry.username %>" ><% } %><span class="username"><%= entry.username %></span><% { %></a><% } %> <%= timeago(entry.date_added) %>
-      </li>
-
+        <li class="list-group-item list-group-item-info">
+          <% if(user !== undefined) { %>
+            <a href="comments/<%= entry.id %>" class="peep">
+          <% } %>
+          <%= entry.content %></a> <% if(user !== undefined) { %><a href="/users/<%= entry.username %>" ><% } %><span class="username"><%= entry.username %></span><% { %></a><% } %> <%= timeago(entry.date_added) %>
+          <ul class="comments-list">
+            <% if(comments) { %>
+              <% comments.forEach(function(comment){ %>
+                <% if(comment.peep_id === entry.id) { %>
+                  <li class="list-group-item list-group-item-info"><%= comment.comment %> <span class="username"><%= comment.username %></span> <%= timeago(comment.date_added) %></li>
+                <% } %>
+              <% })%>
+            <% } %>
+          </ul>
+        </li>
       <% }) %>
-
     <% } %>
   </ul>
-
 </section>
-<script type="text/javascript">
-  $('.send').on('click', function(){
-    $('.send-comment').submit();
-  });
-</script>
